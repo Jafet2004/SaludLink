@@ -13,6 +13,15 @@
     </header>
     <main>
         <section>
+            <h2>Buscar Usuario</h2>
+            <form id="searchForm">
+                <label for="searchId">Cédula (Acto de Nacimiento):</label>
+                <input type="text" id="searchId" name="searchId" required><br><br>
+                <button type="submit">Buscar</button>
+            </form>
+            <div id="searchResults"></div>
+        </section>
+        <section>
             <h2>Formulario de Información General</h2>
             <form id="infoForm">
                 <!-- Personal Information Section -->
@@ -88,9 +97,40 @@
         <p>&copy; 2025 SaludLink. Todos los derechos reservados.</p>
     </footer>
     <script>
+        document.getElementById('searchForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const searchId = document.getElementById('searchId').value;
+            fetch(/search/$,{searchId})
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        document.getElementById('searchResults').innerHTML = JSON.stringify(data.user, null, 2);
+                    } else {
+                        document.getElementById('searchResults').innerHTML = 'Usuario no encontrado.';
+                    }
+                });
+        });
+
         document.getElementById('infoForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            alert('Formulario enviado exitosamente!');
+            const formData = new FormData(document.getElementById('infoForm'));
+            const formJSON = Object.fromEntries(formData.entries());
+
+            fetch('/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(formJSON)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert('Formulario enviado exitosamente!');
+                } else {
+                    alert('Error al enviar el formulario.');
+                }
+            });
         });
     </script>
 </body>
