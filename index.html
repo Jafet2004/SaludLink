@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SaludLink</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="images/logo.jpg" alt="SaludLink Logo" class="logo">
+        <h1>SaludLink</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Formulario de Información General</h2>
+            <form id="infoForm">
+                <!-- Personal Information Section -->
+                <fieldset>
+                    <legend>Información Personal</legend>
+                    <label for="name">Nombre Completo:</label>
+                    <input type="text" id="name" name="name" required><br><br>
+                    <label for="dob">Fecha de Nacimiento:</label>
+                    <input type="date" id="dob" name="dob" required><br><br>
+                    <label for="gender">Sexo o Prefiero NO decir:</label>
+                    <input type="text" id="gender" name="gender" required><br><br>
+                    <label for="age">Edad:</label>
+                    <input type="number" id="age" name="age" required><br><br>
+                    <label for="birthplace">Lugar de Nacimiento (Ciudad, Municipio):</label>
+                    <input type="text" id="birthplace" name="birthplace" required><br><br>
+                    <label for="id">Cédula (Acto de Nacimiento):</label>
+                    <input type="text" id="id" name="id" required><br><br>
+                    <label for="phone"># teléfono:</label>
+                    <input type="tel" id="phone" name="phone" required><br><br>
+                    <label for="email">Correo Electrónico:</label>
+                    <input type="email" id="email" name="email" required><br><br>
+                    <label for="address">Dirección Actual:</label>
+                    <input type="text" id="address" name="address" required><br><br>
+                    <label for="emergency_contact">Contacto de Emergencia:</label>
+                    <input type="text" id="emergency_contact" name="emergency_contact" required><br><br>
+                </fieldset>
+                
+                <!-- Clinical History Section -->
+                <fieldset>
+                    <legend>Historial Clínico</legend>
+                    <label for="blood_type">Tipo de sangre:</label>
+                    <input type="text" id="blood_type" name="blood_type" required><br><br>
+                    <label for="diseases">Enfermedades:</label>
+                    <input type="text" id="diseases" name="diseases" required><br><br>
+                    <label for="surgeries">Cirugías o procedimientos médicos importantes:</label>
+                    <input type="text" id="surgeries" name="surgeries" required><br><br>
+                    <label for="family_history">Antecedentes enfermedades hereditarias:</label>
+                    <input type="text" id="family_history" name="family_history" required><br><br>
+                    <label for="chronic_disease">Ha sido diagnosticado con alguna enfermedad crónica (cual es):</label>
+                    <input type="text" id="chronic_disease" name="chronic_disease" required><br><br>
+                    <label for="hospitalized">Ha sido hospitalizado alguna vez, SI o NO (Por qué motivo):</label>
+                    <input type="text" id="hospitalized" name="hospitalized" required><br><br>
+                    <label for="injury">Ha sufrido alguna lesión grave o accidente:</label>
+                    <input type="text" id="injury" name="injury" required><br><br>
+                    <label for="current_condition">Padece de alguna enfermedad o condición médica actualmente:</label>
+                    <input type="text" id="current_condition" name="current_condition" required><br><br>
+                    <label for="medication">Está tomando algún medicamento de manera regular:</label>
+                    <input type="text" id="medication" name="medication" required><br><br>
+                    <label for="allergies">Es alérgico a algún medicamento, alimento o sustancia:</label>
+                    <input type="text" id="allergies" name="allergies" required><br><br>
+                </fieldset>
+                
+                <!-- Current Conditions Section -->
+                <fieldset>
+                    <legend>Condiciones Actuales</legend>
+                    <label for="substances">Consume Tabaco, Licor o Alguna Sustancia:</label>
+                    <input type="text" id="substances" name="substances" required><br><br>
+                    <label for="diet_exercise">Cómo describiría su alimentación y hábitos de ejercicios:</label>
+                    <input type="text" id="diet_exercise" name="diet_exercise" required><br><br>
+                    <label for="stress_mood">Cómo maneja el estrés y el Buen/mal humor:</label>
+                    <input type="text" id="stress_mood" name="stress_mood" required><br><br>
+                    <label for="mental_treatment">Ha recibido tratamiento para Ansiedad o Depresión (u otros trastornos mentales):</label>
+                    <input type="text" id="mental_treatment" name="mental_treatment" required><br><br>
+                    <label for="therapy">Ha acudido a terapia psicológica o psiquiatría en el pasado:</label>
+                    <input type="text" id="therapy" name="therapy" required><br><br>
+                </fieldset>
+                
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 SaludLink. Todos los derechos reservados.</p>
+    </footer>
+    <script>
+        document.getElementById('infoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Formulario enviado exitosamente!');
+        });
+    </script>
+</body>
+</html>
