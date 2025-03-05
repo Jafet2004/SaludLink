@@ -1,30 +1,43 @@
-document.getElementById("searchForm").addEventListener("submit", function(event) {
-    event.preventDefault();
+document.getElementById("searchForm").addEventListener("submit", function (event) {
+    event.preventDefault(); // Evita que la página se recargue
 
     const cedula = document.getElementById("searchId").value;
-    fetch(`https://tu-servidor.com/api/usuarios?cedula=${cedula}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert("Usuario no encontrado.");
-                return;
+    const regex = /^[0-9]{3}-[0-9]{6}-[0-9]{4}[A-Z]{1}$/;
+
+    if (!regex.test(cedula)) {
+        alert("Por favor, ingresa una cédula válida en el formato Ej: 001-234567-8901X");
+        return;
+    }
+
+    fetch(`http://127.0.0.1:5000/search/${cedula}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`Error en la respuesta: ${response.status}`);
             }
-            // Llenar los campos del formulario con los datos obtenidos
-            document.getElementById("name").value = data.name;
-            document.getElementById("dob").value = data.dob;
-            document.getElementById("gender").value = data.gender;
-            document.getElementById("phone").value = data.phone;
-            document.getElementById("email").value = data.email;
-            document.getElementById("blood_type").value = data.blood_type;
-            document.getElementById("diseases").value = data.diseases;
-            document.getElementById("surgeries").value = data.surgeries;
-            document.getElementById("family_history").value = data.family_history;
-            document.getElementById("chronic_disease").value = data.chronic_disease;
-            document.getElementById("substances").value = data.substances;
-            document.getElementById("diet_exercise").value = data.diet_exercise;
-            document.getElementById("stress_mood").value = data.stress_mood;
-            document.getElementById("mental_treatment").value = data.mental_treatment;
-            document.getElementById("therapy").value = data.therapy;
+            return response.json();
         })
-        .catch(error => console.error("Error al obtener datos:", error));
+        .then(data => {
+            const resultsDiv = document.getElementById("searchResults");
+            if (data.status === "not found") {
+                resultsDiv.innerHTML = `<p style="color: red;">Usuario no encontrado.</p>`;
+            } else {
+                const user = data.user;
+                resultsDiv.innerHTML = `
+                    <h3>Datos del Usuario</h3>
+                    <ul>
+                        <li><strong>Nombre:</strong> ${user.name}</li>
+                        <li><strong>Fecha de Nacimiento:</strong> ${user.dob}</li>
+                        <li><strong>Género:</strong> ${user.gender}</li>
+                        <li><strong>Teléfono:</strong> ${user.phone}</li>
+                        <li><strong>Email:</strong> ${user.email}</li>
+                    </ul>
+                `;
+            }
+        })
+        .catch(error => {
+            console.error("Error al obtener datos:", error);
+            document.getElementById("searchResults").innerHTML = `
+                <p style="color: red;">Error al conectarse con el servidor. Inténtalo más tarde.</p>
+            `;
+        });
 });
