@@ -61,7 +61,7 @@ app.post('/insert', async (req, res) => {
 });
 
 // Buscar datos
-app.get('http://localhost:3000/buscar/:id', async (req, res) => {
+app.get('https://saludlink.netlify.app/buscar/:id', async (req, res) => {
     try {
         await sql.connect(config);
         const id = req.params.id;
@@ -80,7 +80,7 @@ const cors = require('cors');
 app.use(cors());
 
 async function insertarDatos(datos) {
-    const response = await fetch('http://localhost:3000/insert', {
+    const response = await fetch('https://saludlink.netlify.app/insert', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(datos)
