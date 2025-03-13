@@ -77,7 +77,9 @@ app.listen(3000, () => {
 });
 
 const cors = require('cors');
-app.use(cors());
+app.use(cors({
+    origin: 'https://saludlink.netlify.app'
+}));
 
 async function insertarDatos(datos) {
     const response = await fetch('https://saludlink.netlify.app/insert', {
